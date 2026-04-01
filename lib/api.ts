@@ -21,23 +21,38 @@ export interface Product {
 }
 
 export async function getProducts(categorySlug?: string, brand?: string): Promise<Product[]> {
-  const url = new URL(`${API_URL}/products`);
-  if (categorySlug) url.searchParams.append("category_slug", categorySlug);
-  if (brand) url.searchParams.append("brand", brand);
-  
-  const res = await fetch(url.toString(), { next: { revalidate: 3600 } });
-  if (!res.ok) return [];
-  return res.json();
+  try {
+    const url = new URL(`${API_URL}/products`);
+    if (categorySlug) url.searchParams.append("category_slug", categorySlug);
+    if (brand) url.searchParams.append("brand", brand);
+    
+    const res = await fetch(url.toString(), { next: { revalidate: 3600 } });
+    if (!res.ok) return [];
+    return res.json();
+  } catch (error) {
+    console.error("Fetch error in getProducts:", error);
+    return [];
+  }
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
-  const res = await fetch(`${API_URL}/products/${slug}`, { next: { revalidate: 3600 } });
-  if (!res.ok) return null;
-  return res.json();
+  try {
+    const res = await fetch(`${API_URL}/products/${slug}`, { next: { revalidate: 3600 } });
+    if (!res.ok) return null;
+    return res.json();
+  } catch (error) {
+    console.error("Fetch error in getProductBySlug:", error);
+    return null;
+  }
 }
 
 export async function getCategories(): Promise<Category[]> {
-  const res = await fetch(`${API_URL}/categories`, { next: { revalidate: 86400 } });
-  if (!res.ok) return [];
-  return res.json();
+  try {
+    const res = await fetch(`${API_URL}/categories`, { next: { revalidate: 86400 } });
+    if (!res.ok) return [];
+    return res.json();
+  } catch (error) {
+    console.error("Fetch error in getCategories:", error);
+    return [];
+  }
 }
