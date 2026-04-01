@@ -7,6 +7,8 @@ import Image from "next/image";
 import CycleHero from "@/components/Visuals/CycleHero";
 import LaptopTech from "@/components/Visuals/LaptopTech";
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const products = await getProducts();
   const featuredProducts = products.filter(p => p.is_featured === 1);

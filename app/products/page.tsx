@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Product, Category, getProducts, getCategories } from "@/lib/api";
 import { ProductCard } from "@/components/ProductCard";
 import { CategoryFilter } from "@/components/CategoryFilter";
@@ -8,6 +8,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 
 export default function ProductsPage() {
+  return (
+    <Suspense fallback={
+      <div className="bg-[#050505] min-h-screen pt-32 flex items-center justify-center">
+        <div className="text-white/20 font-bold uppercase tracking-widest text-xs">Initializing Catalog...</div>
+      </div>
+    }>
+      <ProductsContent />
+    </Suspense>
+  );
+}
+
+function ProductsContent() {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get("category");
 
