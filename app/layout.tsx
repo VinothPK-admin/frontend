@@ -26,11 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.className} bg-[#050505] text-[#f5f5f7]`}>
+    <html lang="en" className="dark relative">
+      <body className={`${inter.className} relative bg-[#050505] text-[#f5f5f7]`}>
         <SmoothScroll>
           <Navbar />
-          <main className="min-h-screen">
+          <main className="relative min-h-screen">
             {children}
           </main>
           <Footer />

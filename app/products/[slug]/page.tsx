@@ -7,11 +7,12 @@ import { ProductCard } from "@/components/ProductCard";
 export const dynamic = 'force-dynamic';
 
 interface ProductPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const product = await getProductBySlug(params.slug);
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
   if (!product) notFound();
 
   const allProducts = await getProducts(product.category?.slug);
@@ -26,6 +27,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           alt={product.name}
           fill
           priority
+          sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent" />

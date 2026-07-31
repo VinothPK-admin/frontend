@@ -1,5 +1,6 @@
 import { getProducts } from "@/lib/api";
 import { Hero } from "@/components/sections/Hero";
+import { CycleStoryScroll } from "@/components/sections/CycleStoryScroll";
 import { Featured } from "@/components/sections/Featured";
 import { BrandShowcase } from "@/components/BrandShowcase";
 import Link from "next/link";
@@ -16,25 +17,30 @@ export default async function Home() {
   return (
     <div className="bg-[#050505]">
       <Hero />
-      
+
+      {/* Interactive Cycle Storytelling Scroll Experience */}
+      <CycleStoryScroll />
+
       <BrandShowcase />
 
       <Featured products={featuredProducts.slice(0, 3)} />
+
 
       {/* Split categories section */}
       <section className="py-32 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Cycle Dept */}
           <div className="group relative h-[600px] rounded-3xl overflow-hidden">
-            <Image 
-              src="/images/stories/apex_cycle.png" 
-              alt="Cycle Studio" 
+            <Image
+              src="/images/stories/apex_cycle.png"
+              alt="Cycle Studio"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="absolute inset-0 object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
             <div className="absolute inset-0 z-0">
-               <CycleHero autoRotate={false} />
+              <CycleHero autoRotate={false} />
             </div>
             <div className="absolute bottom-12 left-12 right-12">
               <h3 className="text-4xl font-bold text-white mb-4">PK Cycle Mart</h3>
@@ -47,15 +53,15 @@ export default async function Home() {
 
           {/* Tech Dept */}
           <div className="group relative h-[600px] rounded-3xl overflow-hidden">
-            <Image 
-              src="/images/stories/apex_tech.png" 
-              alt="Tech Lab" 
+            <Image
+              src="/images/stories/apex_tech.png"
+              alt="Tech Lab"
               fill
               className="absolute inset-0 object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
             <div className="absolute inset-0 z-0">
-               <LaptopTech autoRotate={false} />
+              <LaptopTech autoRotate={false} />
             </div>
             <div className="absolute bottom-12 left-12 right-12">
               <h3 className="text-4xl font-bold text-white mb-4">PK Laptop & Mobile Service</h3>

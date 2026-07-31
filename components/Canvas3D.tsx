@@ -2,7 +2,8 @@
 
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Environment, ContactShadows, OrbitControls, Stage } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
+import * as THREE from "three";
 
 interface Canvas3DProps {
   children: React.ReactNode;
@@ -10,30 +11,38 @@ interface Canvas3DProps {
   autoRotate?: boolean;
 }
 
-export default function Canvas3D({ children, className = "h-full w-full", autoRotate = true }: Canvas3DProps) {
+export default function Canvas3D({
+  children,
+  className = "relative h-full w-full",
+  autoRotate = true,
+}: Canvas3DProps) {
   return (
     <div className={className}>
-      <Canvas shadows camera={{ position: [0, 0, 5], fov: 45 }}>
-        <Stage intensity={0.5} environment="city" adjustCamera={false}>
-          <Suspense fallback={null}>
-            <group>
-              {children}
-            </group>
-            <Environment preset="city" />
-            <ContactShadows 
-              position={[0, -1.2, 0]} 
-              opacity={0.4} 
-              scale={10} 
-              blur={2.5} 
-              far={10} 
-            />
-          </Suspense>
-        </Stage>
-        <OrbitControls 
-          enableZoom={false} 
+      <Canvas
+        gl={{
+          antialias: true,
+          powerPreference: "high-performance",
+          toneMapping: THREE.ACESFilmicToneMapping,
+        }}
+        shadows={false}
+        camera={{ position: [0, 0.1, 4.8], fov: 42 }}
+      >
+        {/* Optimized Studio Lighting setup for realistic metallic & emissive rendering */}
+        <ambientLight intensity={0.8} />
+        <directionalLight position={[8, 10, 6]} intensity={1.8} color="#ffffff" />
+        <directionalLight position={[-8, -5, -4]} intensity={0.6} color="#C5A46E" />
+        <pointLight position={[0, 4, 3]} intensity={1.2} color="#ffffff" />
+        <pointLight position={[0, -3, -2]} intensity={0.5} color="#06b6d4" />
+
+        <Suspense fallback={null}>
+          <group>{children}</group>
+        </Suspense>
+
+        <OrbitControls
+          enableZoom={false}
           enablePan={false}
           autoRotate={autoRotate}
-          autoRotateSpeed={0.5}
+          autoRotateSpeed={0.6}
         />
       </Canvas>
     </div>
