@@ -10,12 +10,11 @@ const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700", "
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
 };
 
 export const metadata: Metadata = {
-  title: "PK Cycle Mart & Laptop Service | Premium Tech & Mobility",
-  description: "PK Cycle Mart and PK Laptop and Mobile Service Center. Expert multiserve excellence for your cycles and digital gadgets.",
+  title: "PK Cycle Mart & Tech Hub | Cycles, Tyres & Repairs",
+  description: "Shop cycles, tyres, spare parts, and book laptop or mobile repairs with PK Cycle Mart & Tech Hub.",
   keywords: ["pk cycle mart", "pk laptop service", "mobile repair", "cycles", "tech service"],
   authors: [{ name: "PK Team" }],
 };

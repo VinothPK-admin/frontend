@@ -8,7 +8,11 @@ import CycleHero from "@/components/Visuals/CycleHero";
 import LaptopTech from "@/components/Visuals/LaptopTech";
 
 export default async function Home() {
-  const products = await getProducts();
+  let inventoryUnavailable = false;
+  const products = await getProducts().catch(() => {
+    inventoryUnavailable = true;
+    return [];
+  });
   const featuredProducts = products.filter(p => p.is_featured === 1);
 
   return (
@@ -17,7 +21,7 @@ export default async function Home() {
       
       <BrandShowcase />
 
-      <Featured products={featuredProducts.slice(0, 3)} />
+      <Featured products={featuredProducts.slice(0, 3)} inventoryUnavailable={inventoryUnavailable} />
 
       {/* Split categories section */}
       <section className="py-32 px-6 max-w-7xl mx-auto">

@@ -46,6 +46,9 @@ export function Navbar() {
         <button 
           className="md:hidden text-white"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-navigation"
         >
           {mobileMenuOpen ? <X /> : <Menu />}
         </button>
@@ -53,7 +56,7 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden glass border-b border-white/10 absolute top-full left-0 right-0 py-6 px-6 flex flex-col space-y-4 animate-in slide-in-from-top duration-300">
+        <div id="mobile-navigation" className="md:hidden glass border-b border-white/10 absolute top-full left-0 right-0 py-6 px-6 flex flex-col space-y-4 animate-in slide-in-from-top duration-300">
           <Link href="/products" className="text-lg" onClick={() => setMobileMenuOpen(false)}>Inventory</Link>
           <Link href="/about" className="text-lg" onClick={() => setMobileMenuOpen(false)}>Our Ethos</Link>
           <Link href="/contact" className="text-lg" onClick={() => setMobileMenuOpen(false)}>Service Booking</Link>

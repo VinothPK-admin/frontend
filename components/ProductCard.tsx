@@ -66,7 +66,7 @@ export function ProductCard({ product, className, horizontal }: ProductCardProps
         </div>
 
         <Link 
-          href={`/products/${product.slug}`}
+          href={`/products/${encodeURIComponent(product.slug)}`}
           className="mt-auto text-sm font-bold text-white flex items-center space-x-2 group/link"
         >
           <span>View Details</span>

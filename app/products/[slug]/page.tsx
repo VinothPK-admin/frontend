@@ -5,14 +5,15 @@ import Link from "next/link";
 import { ProductCard } from "@/components/ProductCard";
 
 interface ProductPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const product = await getProductBySlug(params.slug);
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
   if (!product) notFound();
 
-  const allProducts = await getProducts(product.category?.slug);
+  const allProducts = await getProducts(product.category?.slug).catch(() => []);
   const relatedProducts = allProducts.filter(p => p.id !== product.id).slice(0, 2);
 
   return (

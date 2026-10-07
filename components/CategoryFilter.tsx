@@ -14,6 +14,7 @@ export function CategoryFilter({ categories, activeSlug, onCategoryChange }: Cat
     <div className="flex flex-wrap justify-center gap-4 mb-16">
       <button
         onClick={() => onCategoryChange(null)}
+        aria-pressed={!activeSlug}
         className={cn(
           "px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all",
           !activeSlug 
@@ -27,6 +28,7 @@ export function CategoryFilter({ categories, activeSlug, onCategoryChange }: Cat
         <button
           key={category.id}
           onClick={() => onCategoryChange(category.slug)}
+          aria-pressed={activeSlug === category.slug}
           className={cn(
             "px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all",
             activeSlug === category.slug 

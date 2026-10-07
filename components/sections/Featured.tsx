@@ -6,9 +6,10 @@ import { ProductCard } from "../ProductCard";
 
 interface FeaturedProps {
   products: Product[];
+  inventoryUnavailable?: boolean;
 }
 
-export function Featured({ products }: FeaturedProps) {
+export function Featured({ products, inventoryUnavailable = false }: FeaturedProps) {
   return (
     <section className="py-24 px-6 max-w-7xl mx-auto">
       <div className="flex justify-between items-end mb-12">
@@ -24,7 +25,11 @@ export function Featured({ products }: FeaturedProps) {
         </Link>
       </div>
 
-      <div className="space-y-8">
+      {inventoryUnavailable ? (
+        <p role="status" className="rounded-3xl border border-white/10 bg-white/[0.03] p-10 text-center text-white/60">Inventory is temporarily unavailable. Please try again later or contact the store.</p>
+      ) : products.length === 0 ? (
+        <p className="rounded-3xl border border-white/10 bg-white/[0.03] p-10 text-center text-white/60">Featured products will appear here soon.</p>
+      ) : <div className="space-y-8">
         {products.slice(0, 1).map((product) => (
           <ProductCard key={product.id} product={product} horizontal />
         ))}
@@ -34,7 +39,7 @@ export function Featured({ products }: FeaturedProps) {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
-      </div>
+      </div>}
     </section>
   );
 }

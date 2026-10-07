@@ -26,7 +26,7 @@ export default function ContactPage() {
           >
             <MapPin className="w-8 h-8 text-[#C5A46E] mx-auto mb-6" />
             <h3 className="text-lg font-bold text-white mb-2">Visit Shop</h3>
-            <p className="text-white/40 text-sm">Main Market, Road 7<br />Indian Cycle Hub</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Main+Market+Road+7+Indian+Cycle+Hub" target="_blank" rel="noreferrer" className="text-white/50 text-sm underline-offset-4 hover:text-white hover:underline">Main Market, Road 7<br />Indian Cycle Hub · Get directions</a>
           </motion.div>
 
           <motion.div 
@@ -38,7 +38,7 @@ export default function ContactPage() {
           >
             <Phone className="w-8 h-8 text-[#C5A46E] mx-auto mb-6" />
             <h3 className="text-lg font-bold text-white mb-2">Call Experts</h3>
-            <p className="text-white/40 text-sm">+91 98765 43210<br />+91 12345 67890</p>
+            <p className="text-white/40 text-sm"><a href="tel:+919876543210" className="hover:text-white">+91 98765 43210</a><br /><a href="tel:+911234567890" className="hover:text-white">+91 12345 67890</a></p>
           </motion.div>
 
           <motion.div 
@@ -50,7 +50,7 @@ export default function ContactPage() {
           >
             <Mail className="w-8 h-8 text-[#C5A46E] mx-auto mb-6" />
             <h3 className="text-lg font-bold text-white mb-2">Email Us</h3>
-            <p className="text-white/40 text-sm">service@pk.com<br />sales@pk.com</p>
+            <p className="text-white/40 text-sm"><a href="mailto:service@pk.com" className="hover:text-white">service@pk.com</a><br /><a href="mailto:sales@pk.com" className="hover:text-white">sales@pk.com</a></p>
           </motion.div>
 
           <motion.div 
@@ -71,9 +71,9 @@ export default function ContactPage() {
           <p className="text-white/50 mb-8">
             Want to skip the queue? Drop a message for cycle servicing or mobile repairs and we&apos;ll schedule your slot.
           </p>
-          <button className="px-12 py-5 bg-[#C5A46E] text-black rounded-full font-bold hover:scale-105 transition-transform">
-            Book Appointment
-          </button>
+          <a href="mailto:service@pk.com?subject=Service%20booking&body=Hello%2C%20I%27d%20like%20to%20book%20a%20service.%20Please%20contact%20me%20to%20confirm%20a%20time." className="inline-block px-12 py-5 bg-[#C5A46E] text-black rounded-full font-bold hover:scale-105 transition-transform">
+            Request an appointment
+          </a>
         </div>
       </div>
     </div>
