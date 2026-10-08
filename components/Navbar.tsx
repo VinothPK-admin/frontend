@@ -32,6 +32,7 @@ export function Navbar() {
         {/* Desktop Links */}
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-white/70">
           <Link href="/products" className="hover:text-white transition-colors">Inventory</Link>
+          <Link href="/cycles" className="hover:text-white transition-colors">Cycles</Link>
           <Link href="/about" className="hover:text-white transition-colors">Our Ethos</Link>
           <Link href="/contact" className="hover:text-white transition-colors">Service Booking</Link>
           <Link 
@@ -58,6 +59,7 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div id="mobile-navigation" className="md:hidden glass border-b border-white/10 absolute top-full left-0 right-0 py-6 px-6 flex flex-col space-y-4 animate-in slide-in-from-top duration-300">
           <Link href="/products" className="text-lg" onClick={() => setMobileMenuOpen(false)}>Inventory</Link>
+          <Link href="/cycles" className="text-lg" onClick={() => setMobileMenuOpen(false)}>Cycle Mart</Link>
           <Link href="/about" className="text-lg" onClick={() => setMobileMenuOpen(false)}>Our Ethos</Link>
           <Link href="/contact" className="text-lg" onClick={() => setMobileMenuOpen(false)}>Service Booking</Link>
         </div>

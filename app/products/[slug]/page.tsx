@@ -15,6 +15,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   const allProducts = await getProducts(product.category?.slug).catch(() => []);
   const relatedProducts = allProducts.filter(p => p.id !== product.id).slice(0, 2);
+  const isCycle = product.category?.slug === "cycles";
+  const displayPrice = product.price_inr != null
+    ? new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(product.price_inr)
+    : isCycle ? "Ask for price" : product.price || "Ask for price";
+  const contactHref = isCycle
+    ? `/contact?product=${encodeURIComponent(product.name)}`
+    : "/contact";
 
   return (
     <div className="bg-[#050505] min-h-screen">
@@ -41,7 +48,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <h1 className="text-5xl md:text-8xl font-extrabold tracking-tighter text-white mb-6 leading-[0.9]">
             {product.name}
           </h1>
-          <p className="text-2xl text-white/50 font-bold">{product.price}</p>
+          <p className="text-2xl text-white/70 font-bold">{displayPrice}</p>
+          {isCycle && (
+            <p className={`mt-3 text-sm font-bold ${product.availability === "in_stock" ? "text-emerald-300" : product.availability === "on_request" ? "text-[#C5A46E]" : "text-white/50"}`}>
+              {product.availability === "in_stock" ? "In stock - confirm with the shop" : product.availability === "on_request" ? "Available on request" : "Out of stock"}
+            </p>
+          )}
         </div>
       </section>
 
@@ -51,7 +63,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <div>
             <h2 className="text-3xl font-bold text-white mb-8">The Specification</h2>
             <div className="space-y-6">
-              {Object.entries(product.specs).map(([key, value]) => (
+              {Object.entries(product.specs || {}).map(([key, value]) => (
                 <div key={key} className="flex justify-between items-center py-4 border-b border-white/5">
                   <span className="text-white/40 uppercase text-xs font-bold tracking-widest">{key}</span>
                   <span className="text-white font-medium">{value}</span>
@@ -65,10 +77,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
               {product.description}
             </p>
             <Link 
-              href="/contact" 
+              href={contactHref}
               className="px-10 py-5 bg-white text-black rounded-full font-bold text-center hover:scale-[1.02] transition-transform"
             >
-              Inquire Now
+              {isCycle ? "Enquire about this cycle" : "Inquire Now"}
             </Link>
           </div>
         </div>
@@ -88,8 +100,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
       {/* Back Link */}
       <div className="py-24 text-center">
-        <Link href="/products" className="text-white/40 hover:text-white transition-colors uppercase text-xs font-bold tracking-[0.4em]">
-          Return to Catalog
+        <Link href={isCycle ? "/cycles" : "/products"} className="text-white/40 hover:text-white transition-colors uppercase text-xs font-bold tracking-[0.4em]">
+          {isCycle ? "Return to Cycle Shop" : "Return to Catalog"}
         </Link>
       </div>
     </div>

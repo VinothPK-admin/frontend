@@ -10,7 +10,7 @@ export function Footer() {
           <div className="flex flex-col space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">Explore</h4>
             <Link href="/products" className="text-sm text-muted hover:text-white transition-colors">All inventory</Link>
-            <Link href="/products?category=cycles" className="text-sm text-muted hover:text-white transition-colors">Cycles</Link>
+            <Link href="/cycles" className="text-sm text-muted hover:text-white transition-colors">Cycles</Link>
             <Link href="/products?category=tech" className="text-sm text-muted hover:text-white transition-colors">Tech</Link>
           </div>
           <div className="flex flex-col space-y-3">
@@ -24,6 +24,7 @@ export function Footer() {
             <Link href="/contact" className="text-sm text-muted hover:text-white transition-colors">Contact</Link>
             <a href="mailto:service@pk.com" className="text-sm text-muted hover:text-white transition-colors">Email service</a>
             <a href="tel:+919876543210" className="text-sm text-muted hover:text-white transition-colors">Call the shop</a>
+            <Link href="/admin" className="text-sm text-muted hover:text-white transition-colors">Admin inventory</Link>
           </div>
           <div className="flex flex-col space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">Our stores</h4>

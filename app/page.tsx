@@ -13,7 +13,7 @@ export default async function Home() {
     inventoryUnavailable = true;
     return [];
   });
-  const featuredProducts = products.filter(p => p.is_featured === 1);
+  const featuredProducts = products.filter(p => p.is_featured === 1 && (p.category?.slug !== "cycles" || p.availability !== "out_of_stock"));
 
   return (
     <div className="bg-[#050505]">
@@ -40,9 +40,9 @@ export default async function Home() {
             </div>
             <div className="absolute bottom-12 left-12 right-12">
               <h3 className="text-4xl font-bold text-white mb-4">PK Cycle Mart</h3>
-              <p className="text-white/60 mb-8 max-w-md font-medium">Precision-built cycles and expert spares at PK Mart.</p>
-              <Link href="/products?category=cycles" className="px-6 py-3 bg-white text-black rounded-full font-bold text-sm inline-block">
-                Enter Store
+              <p className="text-white/60 mb-8 max-w-md font-medium">Explore cycles listed by the shop, compare the details, and ask about availability.</p>
+              <Link href="/cycles" className="px-6 py-3 bg-white text-black rounded-full font-bold text-sm inline-block">
+                Shop Cycles
               </Link>
             </div>
           </div>
